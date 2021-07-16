@@ -1,0 +1,120 @@
+// USER VARIABLES SECTION
+
+$fontsize: 1rem // Body Font Size
+$accent: orange // Accent Color
+$textcolor: #fff // Text Color
+$lineheight: 1.65 // Document Line Height
+$userfont: roboto-oh5, sans-serif // User Font Family
+$systemfont: -apple-system, BlinkMacSystemFont, Arial, sans-serif // System Font Family
+// Bootstrap compatible gutter variable => $gutter
+$grid-gutter-width: 1.25rem
+$gutter: $grid-gutter-width
+
+$background: rgba(5, 10, 30, 1)
+$transparent: rgba(0, 0, 0, 0)
+
+$green: rgba(0, 200, 0, 1)
+$green-straight: linear-gradient(135deg, $background 0%, $green 100%)
+$green-reverse: linear-gradient(315deg, $background 0%, $green 100%)
+$green-straight-transparent: linear-gradient(135deg, $transparent 25%, $green 100%)
+$green-reverse-transparent: linear-gradient(315deg, $transparent 25%, $green 100%)
+
+$blue: rgba(0, 200, 250, 1)
+$blue-straight: linear-gradient(135deg, $background 0%, $blue 100%)
+$blue-reverse: linear-gradient(315deg, $background 0%, $blue 100%)
+$blue-straight-transparent: linear-gradient(135deg, $transparent 25%, $blue 100%)
+$blue-reverse-transparent: linear-gradient(315deg, $transparent 25%, $blue 100%)
+
+$yellow: rgba(250, 250, 0, 1)
+$yellow-straight: linear-gradient(135deg, $background 0%, $yellow 100%)
+$yellow-reverse: linear-gradient(315deg, $background 0%, $yellow 100%)
+$yellow-straight-transparent: linear-gradient(135deg, $transparent 25%, $yellow 100%)
+$yellow-reverse-transparent: linear-gradient(315deg, $transparent 25%, $yellow 100%)
+
+$violet: rgba(150, 0, 250, 1)
+$violet-straight: linear-gradient(135deg, $background 0%, $violet 100%)
+$violet-reverse: linear-gradient(315deg, $background 0%, $violet 100%)
+$violet-straight-transparent: linear-gradient(135deg, $transparent 25%, $violet 100%)
+$violet-reverse-transparent: linear-gradient(315deg, $transparent 25%, $violet 100%)
+
+$shadow: rgba(5, 10, 30, 0.5)
+$shadow-left-top: (-$gutter*0.5) (-$gutter*0.5) ($gutter*0.5) (-$gutter*0.25) $shadow
+$shadow-right-bottom: ($gutter*0.5) ($gutter*0.5) ($gutter*0.5) (-$gutter*0.25) $shadow
+// $shadow-right-top: ($gutter*0.5) (-$gutter*0.5) ($gutter*0.5) (-$gutter*0.25) $shadow
+// $shadow-left-bottom: -($gutter*0.5) ($gutter*0.5) ($gutter*0.5) (-$gutter*0.25) $shadow
+
+$text-shadow-left-top: (-$gutter*0.1) (-$gutter*0.1) ($gutter*0.1) $shadow
+$text-shadow-right-bottom: ($gutter*0.1) ($gutter*0.1) ($gutter*0.1) $shadow
+
+$transition-time: .25s
+$transition-way: ease-in // cubic-bezier(0.6, 0, 0, 3)
+$border-radius: 0.5rem
+$border-thickness: .125rem
+$item-size: $gutter*3
+$item-shift: calc(50% - (#{$item-size}*0.5) + #{$border-thickness})
+$container__min-height: $fontsize*5
+
+@mixin flex()
+	display: flex
+	flex-wrap: wrap
+	justify-content: center
+	align-items: center
+
+@mixin before_initial()
+	top: -$border-thickness
+	left: -$border-thickness
+	box-shadow: $shadow-right-bottom
+	
+@mixin before-final()
+	top: $border-thickness*0.125
+	left: $border-thickness*0.125
+	box-shadow: $shadow-left-top
+
+
+// IMPORT SECTION
+
+@import 'node_modules/bootstrap/scss/bootstrap-reboot.scss' // Bootstrap Reboot collection
+@import 'node_modules/bootstrap/scss/mixins/_breakpoints.scss' // Bootstrap Breakpoints mixin
+// @import 'node_modules/bootstrap/scss/bootstrap-grid.scss' // Optional Bootstrap Grid
+// @import 'node_modules/bootstrap/scss/utilities/_sizing.scss' // Optional Bootstrap Utilites
+
+// FONTS LOAD SECTION
+
+@mixin font($fname, $fstyle, $fweight, $furl)
+	@font-face
+		font-family: $fname
+		font-style: $fstyle
+		font-weight: $fweight
+		src: url($furl) format('woff2')
+
+@include font('roboto-oh5', normal, 400, '../fonts/roboto-regular-webfont.woff2')
+@include font('roboto-oh5', italic, 400, '../fonts/roboto-italic-webfont.woff2')
+@include font('roboto-oh5', normal, 700, '../fonts/roboto-bold-webfont.woff2')
+@include font('roboto-oh5', italic, 700, '../fonts/roboto-bolditalic-webfont.woff2')
+
+// GENERAL DOCUMENT STYLES
+
+::placeholder
+	color: #666
+
+::selection
+	background-color: $accent
+	color: #fff
+
+input, textarea
+	outline: none
+	&:focus:required:invalid
+		border-color: red
+	&:required:valid
+		border-color: green
+
+body
+	font-family: $userfont
+	font-size: $fontsize
+	line-height: $lineheight
+	color: $textcolor
+	min-width: 320px
+	position: relative
+	overflow-x: hidden
+	background-color: $background
+	margin: auto

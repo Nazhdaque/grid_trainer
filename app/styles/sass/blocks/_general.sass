@@ -1,0 +1,332 @@
+// GENERAL PROJECT STYLES
+
+.flex
+    @include flex
+    .container
+        padding: $gutter*0.5
+        margin-top: $gutter*1.5
+
+.trainer
+    .container
+        padding: $gutter*0.5
+
+.btn
+    cursor: pointer
+    
+.grid
+    display: grid
+    /* вертикальный gap */
+    column-gap: $gutter
+    /* горизонтальный gap */
+    row-gap: $gutter
+    /* вертикальный и горизонтальный gap */
+    gap: $gutter
+
+body, .trainer
+    > .grid
+        margin: $gutter
+
+.grid_0
+    grid-template-columns: repeat(auto-fit, minmax($gutter*5, $gutter*5))
+    justify-content: center
+    gap: $gutter*0.125
+    .container
+        padding: $gutter*0.5
+        margin: $gutter*0.5
+
+.container
+    border-radius: $border-radius
+    padding: $gutter*2.5 $gutter $gutter // !!!
+    position: relative
+    transform-style: preserve-3d
+    box-sizing: border-box
+    min-height: $container__min-height
+    transform: translateZ(1px)
+    text-shadow: $text-shadow-right-bottom
+    transition: $transition-time $transition-way
+    text-indent: $gutter*0.25
+    .item
+        @include flex
+        border-radius: $border-radius*4
+        width: $item-size
+        height: $item-size
+        transition: $transition-time $transition-way
+        margin-left: 0
+        box-shadow: $text-shadow-right-bottom
+        text-shadow: $text-shadow-right-bottom
+        font-size: $fontsize*2
+        font-weight: bold
+        text-indent: initial
+    &::before
+        @include before_initial
+        position: absolute
+        content: ""
+        width: calc(100% + #{$border-thickness})
+        height: calc(100% + #{$border-thickness})
+        border-radius: $border-radius*1.25
+        transform: translateZ(-1px)
+        transition: box-shadow $transition-time $transition-way
+    &::after 
+        position: absolute
+        content: ""
+        width: 100%
+        height: 100%
+        border-radius: $border-radius
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        transition: $transition-time $transition-way
+        z-index: -1
+        padding: $gutter*0.5 $gutter*0.5 $gutter*0.5 $gutter*0.75
+        overflow: hidden
+        text-overflow: ellipsis
+        text-shadow: (-$gutter*0.05) (-$gutter*0.05) ($gutter*0.05) $shadow
+        opacity: 0
+    &:hover
+        &::before
+            @include before-final
+        &::after
+            opacity: 1
+        .item
+            margin-left: calc(50% - #{$gutter}*1.5)
+            box-shadow: $text-shadow-left-top
+            text-shadow: $text-shadow-left-top
+        &.btn
+            .item
+                margin-left: initial
+    // ============================================================ lvl1 odd
+    &:nth-child(2n-1)
+        background: $violet-straight
+        color: $violet
+        &::before
+            background: $violet-reverse-transparent
+        &::after
+            background: $yellow-reverse
+            color: $yellow
+        &:hover
+            color: $transparent
+            text-shadow: initial
+            &::before
+                background: $yellow-straight-transparent
+            &::after
+                // background: $yellow-reverse
+            .item
+                border: $border-thickness solid $yellow
+                color: $yellow
+            .container
+                color: $transparent
+                text-shadow: initial
+                &::before
+                    @include before-final
+                    background: $green-straight-transparent
+                &::after
+                    background: $green-reverse
+                    color: $green
+                    opacity: 1
+                &:hover
+                    color: $blue
+                    text-shadow: $text-shadow-right-bottom
+                    .container
+                        color: $green
+                        text-shadow: $text-shadow-right-bottom
+                        &::before
+                            @include before_initial
+                            background: $green-reverse-transparent
+                        &::after
+                            opacity: 0
+                        &:hover
+                            color: $transparent
+                            text-shadow: initial
+                            &::before
+                                @include before-final
+                                background: $violet-straight-transparent
+                            &::after
+                                opacity: 1
+                .container
+                    color: $transparent
+                    box-shadow: initial
+                    &::before
+                        background: $violet-straight-transparent
+                    &::after 
+                        background: $violet-reverse
+                        color: $violet
+        // ======================================================== lvl2 odd
+        .container
+            background: $blue-straight
+            color: $blue
+            &::before
+                background: $blue-reverse-transparent
+                // box-shadow: $shadow-right-bottom
+            &::after
+                background: $green-reverse
+                color: $green
+            &:hover
+                &::before
+                    @include before_initial
+                    background: $blue-reverse-transparent
+                &::after
+                    opacity: 0
+            // ==================================================== lvl3 odd
+            .container
+                background: $green-straight
+                color: $green
+                &::before
+                    background: $green-reverse-transparent
+                &::after
+                    background: $violet-reverse
+                    color: $violet
+        .item
+            border: $border-thickness solid $violet
+            color: $violet
+    // ============================================================ lvl1 even
+    &:nth-child(2n)
+        background: $blue-straight
+        color: $blue
+        &::before
+            background: $blue-reverse-transparent
+        &::after
+            background: $green-reverse
+            color: $green
+        &:hover
+            color: $transparent
+            text-shadow: initial
+            &::before
+                background: $green-straight-transparent
+            &::after
+                background: $green-reverse
+            .item
+                color: $green
+                border: $border-thickness solid $green
+            .container
+                color: $transparent
+                text-shadow: initial
+                &::before
+                    @include before-final
+                    background: $yellow-straight-transparent
+                &::after
+                    background: $yellow-reverse
+                    color: $yellow
+                    opacity: 1
+                &:hover
+                    .container
+                        color: $yellow
+                        text-shadow: $text-shadow-left-top
+                        &::before
+                            @include before_initial
+                            background: $yellow-reverse-transparent
+                        &::after
+                            opacity: 0
+                        &:hover
+                            color: $transparent
+                            text-shadow: initial
+                            &::before
+                                @include before-final
+                                background: $blue-straight-transparent
+                            &::after
+                                color: $blue
+                                opacity: 1
+                .container
+                    color: $transparent
+                    text-shadow: initial
+                    &::before
+                        background: $blue-straight-transparent
+                    &::after 
+                        background: $blue-reverse
+                        color: $blue
+                        opacity: 1
+        // ======================================================== lvl2 even
+        .container
+            background: $violet-straight
+            color: $violet
+            &::before
+                background: $violet-reverse-transparent
+                // box-shadow: $shadow-right-bottom
+            &::after
+                background: $yellow-reverse
+                color: $yellow
+            &:hover
+                color: $violet
+                text-shadow: $text-shadow-right-bottom
+                &::before
+                    @include before_initial
+                    background: $violet-reverse-transparent
+                &::after
+                    opacity: 0
+            // ==================================================== lvl3 even
+            .container
+                background: $yellow-straight
+                color: $yellow
+                &::before
+                    background: $yellow-reverse-transparent
+                &::after
+                    background: $blue-reverse
+                    color: $blue
+        .item
+            border: $border-thickness solid $blue
+            color: $blue
+
+@each $tagname in header, main, footer, section, aside, article, h2, nav, img, p
+    #{$tagname}.container
+        text-transform: uppercase
+        @if $tagname == 'aside'
+            &::after
+                content: 'sidebar'
+        @else if $tagname == 'h2'
+            &::after
+                content: 'heading'
+        @else if $tagname == 'nav'
+            &::after
+                content: 'navbar'
+        @else if $tagname == 'p'
+            &::after
+                content: 'txt' 
+        @else
+            &::after
+                content: '#{$tagname}'
+
+span
+    transition: $transition-time $transition-way
+    text-shadow: $text-shadow-right-bottom
+    position: absolute
+    top: 0
+    left: 0
+    padding: $gutter*0.5 $gutter*0.5 0 $gutter
+    white-space: nowrap
+    text-indent: initial
+    overflow: hidden
+    text-overflow: ellipsis
+    max-width: 99%
+    opacity: 1
+    
+.container
+    &:hover
+        span
+            top: 100%
+            opacity: 0
+    .container
+        &:hover
+            span
+                top: 0
+                opacity: 1
+        .container
+            &:hover
+                span
+                    top: 100%
+                    opacity: 0
+        
+p
+    margin: 0
+
+
+.s
+    min-height: calc((#{$container__min-height}*2) + #{$gutter})
+.m
+    min-height: calc((#{$container__min-height}*3) + #{$gutter}*2)
+.l
+    min-height: calc((#{$container__min-height}*4) + #{$gutter}*3)
+.xl
+    min-height: calc((#{$container__min-height}*5) + #{$gutter}*4)
+
+
+         
